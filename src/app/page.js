@@ -1,21 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import { Montserrat } from "next/font/google";
 import { useState } from "react";
 import { FirstStep } from "./components/FirstStep.jsx";
 import { SecondStep } from "./components/SecondStep.jsx";
 import { ThirdStep } from "./components/ThirdStep.jsx";
-export default function Home(currentStep) {
+import { Done } from "./components/Done.jsx";
+const montserrat = Montserrat({ subsets: ["latin"] });
+export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
 
   return (
-    <div>
+    <div className={`${montserrat.className}`}>
       {currentStep === 1 ? (
-        <FirstStep currentStep={currentStep} />
+        <FirstStep setCurrentStep={setCurrentStep} />
       ) : currentStep === 2 ? (
-        <SecondStep />
+        <SecondStep setCurrentStep={setCurrentStep} />
       ) : currentStep === 3 ? (
-        <ThirdStep />
+        <ThirdStep setCurrentStep={setCurrentStep} />
       ) : (
         <Done />
       )}
