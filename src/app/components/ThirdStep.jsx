@@ -1,4 +1,4 @@
-export function ThirdStep({ setCurrentStep }) {
+export function ThirdStep({ setCurrentStep, form, onChange }) {
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -13,14 +13,17 @@ export function ThirdStep({ setCurrentStep }) {
             </p>
           </div>
         </div>
-        <div>
-          <label className="pl-[70px]">Date of birth *</label>
+        <form>
+          <label className="pl-[70px] text-sm">Date of birth *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
             type="date"
             required
+            id="date"
+            onChange={onChange}
+            value={form.date}
           />
-          <label className="pl-[70px]">Profile image *</label>
+          <label className="pl-[70px] text-sm">Profile image *</label>
           <input
             className="block w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl text-sm text-gray-500
                file:mr-4 file:py-2 file:px-4
@@ -31,8 +34,11 @@ export function ThirdStep({ setCurrentStep }) {
             type="file"
             accept="image/*"
             required
+            id="image"
+            onChange={onChange}
+            value={form.image}
           />
-        </div>
+        </form>
         <div className="flex">
           <button
             onClick={() => setCurrentStep(2)}

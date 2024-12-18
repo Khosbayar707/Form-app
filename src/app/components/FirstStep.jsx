@@ -1,4 +1,6 @@
-export function FirstStep({ setCurrentStep }) {
+export function FirstStep({ setCurrentStep, form, onChange, error }) {
+  const red = `block mx-auto w-[70%] p-4 border-[3px] border-red-500 rounded-xl`;
+  const black = `block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl`;
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -13,23 +15,45 @@ export function FirstStep({ setCurrentStep }) {
             </p>
           </div>
         </div>
-        <div>
-          <label className="pl-[70px]">First name *</label>
+        <form>
+          <label className="pl-[70px] text-sm">First name *</label>
+          <input
+            className={error ? red : black}
+            id="firstname"
+            onChange={onChange}
+            value={form.firstname}
+            required
+            type="text"
+          />
+          {error && (
+            <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+              First name cannot contain special characters or numbers.
+            </p>
+          )}
+          <label className="pl-[70px] text-sm">Last name *</label>
+          <input
+            className={error ? red : black}
+            id="lastname"
+            value={form.lastname}
+            onChange={onChange}
+            required
+            type="text"
+          />
+          {error && (
+            <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+              Last name cannot contain special characters or numbers.
+            </p>
+          )}
+          <label className="pl-[70px] text-sm">Username *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-6 border-2 border-black-500 rounded-xl"
+            id="username"
+            value={form.username}
+            onChange={onChange}
             required
+            type="text"
           />
-          <label className="pl-[70px]">Last name *</label>
-          <input
-            className="block mx-auto w-[70%] p-4 mb-6 border-2 border-black-500 rounded-xl"
-            required
-          />
-          <label className="pl-[70px] text-2">Username *</label>
-          <input
-            className="block mx-auto w-[70%] p-4 mb-6 border-2 border-black-500 rounded-xl"
-            required
-          />
-        </div>
+        </form>
 
         <button
           onClick={() => setCurrentStep(2)}

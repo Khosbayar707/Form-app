@@ -1,4 +1,4 @@
-export function SecondStep({ setCurrentStep }) {
+export function SecondStep({ setCurrentStep, form, onChange }) {
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -13,28 +13,44 @@ export function SecondStep({ setCurrentStep }) {
             </p>
           </div>
         </div>
-        <div>
-          <label className="pl-[70px]">E-mail *</label>
+        <form>
+          <label className="pl-[70px] text-sm">E-mail *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
+            id="email"
+            onChange={onChange}
+            value={form.email}
             required
+            type="email"
           />
-          <label className="pl-[70px]">Phone number *</label>
+          <label className="pl-[70px] text-sm">Phone number *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
+            id="number"
+            onChange={onChange}
+            value={form.number}
             required
+            type="number"
           />
-          <label className="pl-[70px] text-2">Password *</label>
+          <label className="pl-[70px] text-sm">Password *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
+            id="password"
+            onChange={onChange}
+            value={form.password}
             required
+            type="password"
           />
-          <label className="pl-[70px] text-2">Confirm password *</label>
+          <label className="pl-[70px] text-sm">Confirm password *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
+            id="confirmPassword"
+            onChange={onChange}
+            value={form.confirmPassword}
             required
+            type="password"
           />
-        </div>
+        </form>
         <div className="flex">
           <button
             onClick={() => setCurrentStep(1)}
