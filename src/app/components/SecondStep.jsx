@@ -1,4 +1,6 @@
-export function SecondStep({ setCurrentStep, form, onChange }) {
+export function SecondStep({ setCurrentStep, form, onChange, error }) {
+  const red = `block mx-auto w-[70%] p-4 border-[3px] border-red-500 rounded-xl`;
+  const black = `block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl`;
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -23,6 +25,11 @@ export function SecondStep({ setCurrentStep, form, onChange }) {
             required
             type="email"
           />
+          {error && (
+            <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+              First name cannot contain special characters or numbers.
+            </p>
+          )}
           <label className="pl-[70px] text-sm">Phone number *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"

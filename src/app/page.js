@@ -35,7 +35,19 @@ export default function Home() {
         setError(false);
       }
     }
+    if (field === "email") {
+      if (
+        form[field]?.includes("@gmail.com") ||
+        form[field]?.includes("@yahoo.com") ||
+        form[field]?.includes("@outlook.com")
+      ) {
+        setError(false);
+      } else {
+        setError(true);
+      }
+    }
   };
+
 
   return (
     <div className={`${montserrat.className}`}>
