@@ -1,6 +1,14 @@
-export function FirstStep({ setCurrentStep, form, onChange, error }) {
-  const red = `block mx-auto w-[70%] p-4 border-[3px] border-red-500 rounded-xl`;
-  const black = `block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl`;
+"use client";
+import { ValidateStepOne } from "../utils/validate";
+
+export function FirstStep({
+  setCurrentStep,
+  form,
+  onChange,
+  setErorrs,
+  errors,
+}) {
+  const { isValid, newErrors } = ValidateStepOne(form);
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -16,47 +24,54 @@ export function FirstStep({ setCurrentStep, form, onChange, error }) {
           </div>
         </div>
         <form>
-          <label className="pl-[70px] text-sm">First name *</label>
-          <input
-            className={error ? red : black}
-            id="firstname"
-            onChange={onChange}
-            value={form.firstname}
-            required
-            type="text"
-          />
-          {error && (
+          <div>
+            <label className="pl-[70px] text-sm">First name *</label>
+            <input
+              className="block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl"
+              id="firstname"
+              onChange={onChange}
+              value={form.firstname}
+              required
+              type="text"
+            />
             <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
-              First name cannot contain special characters or numbers.
+              {errors.firstname}
             </p>
-          )}
+          </div>
           <label className="pl-[70px] text-sm">Last name *</label>
           <input
-            className={error ? red : black}
+            className="block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl"
             id="lastname"
             value={form.lastname}
             onChange={onChange}
             required
             type="text"
           />
-          {error && (
-            <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
-              Last name cannot contain special characters or numbers.
-            </p>
-          )}
+          <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+            {errors.lastname}
+          </p>
           <label className="pl-[70px] text-sm">Username *</label>
           <input
-            className="block mx-auto w-[70%] p-4 mb-6 border-2 border-black-500 rounded-xl"
+            className="block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl"
             id="username"
             value={form.username}
             onChange={onChange}
             required
             type="text"
           />
+          <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+            {errors.username}
+          </p>
         </form>
 
         <button
-          onClick={() => setCurrentStep(2)}
+          onClick={() => {
+            if (isValid) {
+              setCurrentStep(2);
+            } else {
+              setErorrs(newErrors);
+            }
+          }}
           className="block mx-auto w-[80%] p-4 rounded-xl mt-[67px] bg-[#7e7c7c]"
         >
           Continue 1/3

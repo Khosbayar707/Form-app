@@ -1,6 +1,16 @@
-export function SecondStep({ setCurrentStep, form, onChange, error }) {
+"use client";
+import { ValidateStepOne } from "../utils/validate";
+
+export function SecondStep({
+  setCurrentStep,
+  form,
+  onChange,
+  setErorrs,
+  errors,
+}) {
   const red = `block mx-auto w-[70%] p-4 border-[3px] border-red-500 rounded-xl`;
   const black = `block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl`;
+  const { isValid, newErrors } = ValidateStepOne(form);
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -18,21 +28,19 @@ export function SecondStep({ setCurrentStep, form, onChange, error }) {
         <form>
           <label className="pl-[70px] text-sm">E-mail *</label>
           <input
-            className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
-            id="email"
+            className="block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl"
+            id="mail"
             onChange={onChange}
-            value={form.email}
+            value={form.mail}
             required
-            type="email"
+            type="text"
           />
-          {error && (
-            <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
-              First name cannot contain special characters or numbers.
-            </p>
-          )}
+          <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+            {errors.mail}
+          </p>
           <label className="pl-[70px] text-sm">Phone number *</label>
           <input
-            className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
+            className="block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl"
             id="number"
             onChange={onChange}
             value={form.number}
@@ -66,7 +74,13 @@ export function SecondStep({ setCurrentStep, form, onChange, error }) {
             Back
           </button>
           <button
-            onClick={() => setCurrentStep(3)}
+            onClick={() => {
+              if (isValid) {
+                setCurrentStep(3);
+              } else {
+                setErorrs(newErrors);
+              }
+            }}
             className="block mx-auto w-[40%] box-border p-4 rounded-xl mt-[20px] bg-[#7e7c7c]"
           >
             Continue 2/3

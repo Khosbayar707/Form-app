@@ -10,44 +10,24 @@ import { Done } from "./components/Done.jsx";
 const montserrat = Montserrat({ subsets: ["latin"] });
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [form, setForm] = useState({});
-  const [error, setError] = useState(false);
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    mail: "",
+  });
+  const [errors, setErorrs] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    mail: "",
+  });
 
   const onChange = (e) => {
     const field = e.target.id;
     const newValue = { ...form, [field]: e.target.value };
     setForm(newValue);
-    if (field === "firstname" || field === "lastname") {
-      if (
-        form[field]?.includes("1") ||
-        form[field]?.includes("2") ||
-        form[field]?.includes("3") ||
-        form[field]?.includes("4") ||
-        form[field]?.includes("5") ||
-        form[field]?.includes("6") ||
-        form[field]?.includes("7") ||
-        form[field]?.includes("8") ||
-        form[field]?.includes("9") ||
-        form[field]?.includes("0")
-      ) {
-        setError(true);
-      } else {
-        setError(false);
-      }
-    }
-    if (field === "email") {
-      if (
-        form[field]?.includes("@gmail.com") ||
-        form[field]?.includes("@yahoo.com") ||
-        form[field]?.includes("@outlook.com")
-      ) {
-        setError(false);
-      } else {
-        setError(true);
-      }
-    }
   };
-
 
   return (
     <div className={`${montserrat.className}`}>
@@ -56,19 +36,24 @@ export default function Home() {
           setCurrentStep={setCurrentStep}
           form={form}
           onChange={onChange}
-          error={error}
+          setErorrs={setErorrs}
+          errors={errors}
         />
       ) : currentStep === 2 ? (
         <SecondStep
           setCurrentStep={setCurrentStep}
           form={form}
           onChange={onChange}
+          setErorrs={setErorrs}
+          errors={errors}
         />
       ) : currentStep === 3 ? (
         <ThirdStep
           setCurrentStep={setCurrentStep}
           form={form}
           onChange={onChange}
+          setErorrs={setErorrs}
+          errors={errors}
         />
       ) : (
         <Done />
