@@ -88,12 +88,11 @@ export const ValidateStepOne = (form, setCurrentStep) => {
     newErrors.username = "Zaawal buglunu uu";
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (setCurrentStep === 2) {
-    if (form.mail?.includes("@")) {
-      isValid = true;
-    } else {
+    if (!emailRegex.test(form.mail)) {
       isValid = false;
-      newErrors.mail = "mailee shalgana uu";
+      newErrors.mail = "Зөв и-мэйл хаяг оруулна уу";
     }
   }
   return { isValid, newErrors };

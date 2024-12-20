@@ -1,4 +1,15 @@
+"use client";
+import { useState } from "react";
+
 export function ThirdStep({ setCurrentStep, form, onChange }) {
+  const [selectedImage, setSelectedImage] = useState("");
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const objURL = URL.createObjectURL(file);
+    setSelectedImage(objURL);
+  };
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -24,20 +35,26 @@ export function ThirdStep({ setCurrentStep, form, onChange }) {
             value={form.date}
           />
           <label className="pl-[70px] text-sm">Profile image *</label>
-          <input
-            className="block w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl text-sm text-gray-500
+          {selectedImage ? (
+            <div className=" w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl">
+              <img src={selectedImage} />
+            </div>
+          ) : (
+            <input
+              className="block w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl text-sm text-gray-500
                file:mr-4 file:py-2 file:px-4
                file:rounded-full file:border-0
                file:text-sm file:font-semibold
                file:bg-blue-50 file:text-blue-700
                hover:file:bg-blue-100"
-            type="file"
-            accept="image/*"
-            required
-            id="image"
-            onChange={onChange}
-            value={form.image}
-          />
+              type="file"
+              accept="image/*"
+              required
+              id="image"
+              onChange={handleFileChange}
+              value={form.image}
+            />
+          )}
         </form>
         <div className="flex">
           <button
