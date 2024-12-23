@@ -1,6 +1,6 @@
 export const ValidateStepOne = (form, currentStep) => {
   let isValid = true;
-  let newErrors = {
+  const newErrors = {
     firstname: "",
     lastname: "",
     username: "",
@@ -8,65 +8,50 @@ export const ValidateStepOne = (form, currentStep) => {
     password: "",
     confirmPassword: "",
   };
+
+  const containsNumber = (value) => /\d/.test(value);
+
   if (currentStep === 1) {
-    if (form.firstname === "") {
+    if (!form.firstname) {
       isValid = false;
-      newErrors.firstname = "Нэрээ бичнэ үү";
+      newErrors.firstname = "Нэр бичнэ үү.";
+    } else if (containsNumber(form.firstname)) {
+      isValid = false;
+      newErrors.firstname = "Зөвхөн үсэг ашиглана уу.";
     }
-    if (
-      form.firstname?.includes("1") ||
-      form.firstname?.includes("2") ||
-      form.firstname?.includes("3") ||
-      form.firstname?.includes("4") ||
-      form.firstname?.includes("5") ||
-      form.firstname?.includes("6") ||
-      form.firstname?.includes("7") ||
-      form.firstname?.includes("8") ||
-      form.firstname?.includes("9") ||
-      form.firstname?.includes("0")
-    ) {
+
+    if (!form.lastname) {
       isValid = false;
-      newErrors.firstname = "Зөвхөн үсэг ашиглана уу";
+      newErrors.lastname = "Нэр бичнэ үү.";
+    } else if (containsNumber(form.lastname)) {
+      isValid = false;
+      newErrors.lastname = "Зөвхөн үсэг ашиглана уу.";
     }
-    if (form.lastname === "") {
+
+    if (!form.username) {
       isValid = false;
-      newErrors.lastname = "Нэрээ бичнэ үү";
-    }
-    if (
-      form.lastname?.includes("1") ||
-      form.lastname?.includes("2") ||
-      form.lastname?.includes("3") ||
-      form.lastname?.includes("4") ||
-      form.lastname?.includes("5") ||
-      form.lastname?.includes("6") ||
-      form.lastname?.includes("7") ||
-      form.lastname?.includes("8") ||
-      form.lastname?.includes("9") ||
-      form.lastname?.includes("0")
-    ) {
-      isValid = false;
-      newErrors.lastname = "Зөвхөн үсэг ашиглана уу";
-    }
-    if (form.username === "") {
-      isValid = false;
-      newErrors.username = "Заавал шалгана уу";
+      newErrors.username = "Usename оруулна уу.";
     }
   }
 
   if (currentStep === 2) {
     const emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailCheck.test(form.mail)) {
       isValid = false;
-      newErrors.mail = "Зөв и-мэйл хаяг оруулна уу";
+      newErrors.mail = "Зөв и-мэйл хаяг оруулна уу.";
     }
-    if (form.password !== form.confirmPassword) {
-      isValid = false;
-      newErrors.confirmPassword = "Нууц үгээ шалгана уу";
-    }
+
     if (form.password.length <= 7) {
       isValid = false;
-      newErrors.password = "8-аас дээш оронтой байх шаардлагатай";
+      newErrors.password = "Нууц үг 8-аас дээш оронтой байх шаардлагатай.";
+    }
+
+    if (form.password !== form.confirmPassword) {
+      isValid = false;
+      newErrors.confirmPassword = "Нууц үгээ шалгана уу.";
     }
   }
+
   return { isValid, newErrors };
 };
