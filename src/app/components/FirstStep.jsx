@@ -8,7 +8,7 @@ export function FirstStep({
   setErorrs,
   errors,
 }) {
-  const { isValid, newErrors } = ValidateStepOne(form);
+  const { isValid, newErrors } = ValidateStepOne(form, 1);
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">

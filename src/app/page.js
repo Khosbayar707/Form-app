@@ -15,12 +15,16 @@ export default function Home() {
     lastname: "",
     username: "",
     mail: "",
+    password: "",
+    confirmPassword: "",
   });
   const [errors, setErorrs] = useState({
     firstname: "",
     lastname: "",
     username: "",
     mail: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const onChange = (e) => {
@@ -34,6 +38,7 @@ export default function Home() {
       {currentStep === 1 ? (
         <FirstStep
           setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
           form={form}
           onChange={onChange}
           setErorrs={setErorrs}
@@ -42,6 +47,7 @@ export default function Home() {
       ) : currentStep === 2 ? (
         <SecondStep
           setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
           form={form}
           onChange={onChange}
           setErorrs={setErorrs}

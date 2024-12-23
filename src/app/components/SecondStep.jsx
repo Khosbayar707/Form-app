@@ -10,7 +10,7 @@ export function SecondStep({
 }) {
   const red = `block mx-auto w-[70%] p-4 border-[3px] border-red-500 rounded-xl`;
   const black = `block mx-auto w-[70%] p-4 border-2 border-black-500 rounded-xl`;
-  const { isValid, newErrors } = ValidateStepOne(form);
+  const { isValid, newErrors } = ValidateStepOne(form, 2);
   return (
     <div className="max-w-md mx-auto mt-[80px] text-black">
       <div className="w-[480px] h-[655px] rounded-xl bg-[#ffffff]">
@@ -56,6 +56,9 @@ export function SecondStep({
             required
             type="password"
           />
+          <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+            {errors.password}
+          </p>
           <label className="pl-[70px] text-sm">Confirm password *</label>
           <input
             className="block mx-auto w-[70%] p-4 mb-1 border-2 border-black-500 rounded-xl"
@@ -65,6 +68,9 @@ export function SecondStep({
             required
             type="password"
           />
+          <p className="block mx-auto w-[70%] text-red-500 text-[12px]">
+            {errors.confirmPassword}
+          </p>
         </form>
         <div className="flex">
           <button
@@ -80,6 +86,7 @@ export function SecondStep({
               } else {
                 setErorrs(newErrors);
               }
+              ``;
             }}
             className="block mx-auto w-[40%] box-border p-4 rounded-xl mt-[20px] bg-[#7e7c7c]"
           >

@@ -4,6 +4,9 @@ import { useState } from "react";
 export function ThirdStep({ setCurrentStep, form, onChange }) {
   const [selectedImage, setSelectedImage] = useState("");
 
+  const currentdate = new Date();
+  console.log(currentdate.getFullYear());
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -33,11 +36,16 @@ export function ThirdStep({ setCurrentStep, form, onChange }) {
             id="date"
             onChange={onChange}
             value={form.date}
+            min="1900-01-01"
+            max={`${currentdate.getFullYear()}-${currentdate.getMonth()}-${currentdate.getDate()}`}
           />
           <label className="pl-[70px] text-sm">Profile image *</label>
           {selectedImage ? (
-            <div className=" w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl">
-              <img src={selectedImage} />
+            <div>
+              <img
+                className="w-[70%] h-[180px] mx-auto border-2 border-black-500 rounded-xl bg-auto"
+                src={selectedImage}
+              />
             </div>
           ) : (
             <input
